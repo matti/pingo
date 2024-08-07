@@ -106,8 +106,8 @@ func main() {
 	sigs := make(chan os.Signal, 1)
 	signal.Notify(sigs, syscall.SIGTERM, syscall.SIGINT)
 	go func() {
-		sig := <-sigs
-		fmt.Println("got sig", sig)
+		<-sigs
+
 		cancel()
 	}()
 
@@ -125,5 +125,4 @@ func main() {
 	}
 
 	wg.Wait()
-	fmt.Println("wg done")
 }
